@@ -43,11 +43,11 @@ console.log(app.get("ip"));
  */
 var server = http.createServer(app);
 
-//The db.js file refered to in the slide-set (change path if necessary)
+//Her laves en reference til vores db-connect"facade"
 var db = require("../db/db");
 
 //Connection string to your local database (REPLACE connection string with your own)
-var connection_string = "mongodb://localhost:27017";
+var connection_string = "mongodb://test:test@ds015713.mlab.com:15713/examdb";
 
 if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
     connection_string = 'mongodb://' + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
@@ -57,7 +57,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_APP_NAME;
 }
 
-db.connect(connection_string, function (err) {
+db.connect(connection_string, function (err) { //Her oprettes forbindelse til db, med enten local eller openshift connection-string
     if (err) {
         console.log("Could not connect to Database");
         return;
