@@ -24,6 +24,17 @@ router.get('/joke/:_id', function (req, res) {
     });
 });
 
+//Get random joke
+router.get('/random', function (req, res) {
+    jokes.randomJoke(function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+    });
+});
+
 //Add new joke
 router.post('/addjoke', function (req, res) {
     jokes.addJoke(req.body, function (err, data) { //Joken er med i body.
@@ -37,6 +48,8 @@ router.post('/addjoke', function (req, res) {
 
 //Update existing joke
 router.put('/edit/:_id', function (req, res) {
+    console.log("new joke: "+req.body.newjoke);
+    console.log("id to edit: "+req.params._id);
     jokes.editJoke(req.params._id, req.body.newjoke, function (err, data) { //den eksisterende jokes id, samt den ny tekst skal med i body
         if (err) {
             res.send(err);

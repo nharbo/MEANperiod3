@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="myApp">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-controller="jokeController as jokeCtrl">
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Joke</th>
+        <th>Type</th>
+        <th>Last edited</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="joke in jokeCtrl.jokes">
+        <td>{{joke._id}}</td>
+        <td>{{joke.joke}}</td>
+        <td>{{joke.type}}</td>
+        <td>{{joke.lastEdited}}</td>
+        <th><a href="#" ng-click="jokeCtrl.editJoke($index)">Edit</a></th>
+        <td><a href="#" ng-click="jokeCtrl.deleteJoke(joke._id)">Delete</a></td>
+    </tr>
+
+    </tbody>
+</table>
+<p>{{jokeCtrl.output}}</p>
+<button ng-click="jokeCtrl.getRandom()">Get Random</button>
+<input style="width:800px;" type="text" ng-model="jokeCtrl.input">
+<button ng-click="jokeCtrl.editJokeHTTP()">Save</button>
+<button ng-click="jokeCtrl.addJoke()">Add new</button>
+</body>
+
+</html>

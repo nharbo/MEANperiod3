@@ -1,0 +1,9 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+<ul class="session_list">
+    {{#each sessions}}
+        <li>Session username: {{this.user.name}} with email: {{this.user.email}}</li>
+    {{/each}}
+</ul>
+
+

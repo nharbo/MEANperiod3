@@ -25,6 +25,17 @@ function _findJoke(id, callback) {
     });
 }
 
+function _randomJoke(callback) {
+    _allJokes(function (err, data) {
+        if (err) {
+            callback(err);
+        } else {
+            var random = Math.floor(Math.random() * data.length);
+            callback(null, data[random]);
+        }
+    });
+}
+
 function _addJoke(jokeToAdd, callback) {
     var db = connection.get();
     db.collection("jokes").insert(jokeToAdd, function (err, data) { //tilføjer
@@ -39,7 +50,8 @@ function _addJoke(jokeToAdd, callback) {
 function _editJoke(id, newJoke, callback) {
     var db = connection.get();
     db.collection("jokes").updateOne({"_id": new ObjectId(id)},
-        {$set: {
+        {
+            $set: {
                 "joke": newJoke,
                 "lastEdited": new Date()
             }
@@ -69,4 +81,4 @@ exports.findJoke = _findJoke;
 exports.editJoke = _editJoke;
 exports.addJoke = _addJoke;
 exports.deleteJoke = _deleteJoke;
-exports.randomJoke;
+exports.randomJoke = _randomJoke;
