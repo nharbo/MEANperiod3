@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Blog = require('../model/blogpostSchema');
+var Blog = require('../model/blogpostSchema'); //HER kan du skrive kun til "blogpost" skemaet i db, i stedet for collection(Jokes fx).save
 
 //Post
 router.post('/newpost', function (req, res, next) {
@@ -19,7 +19,7 @@ router.post('/newpost', function (req, res, next) {
 
 //Get
 router.get('/myposts/:username', function (req, res, next) {
-    Blog.find({'author': req.params.username, 'draft': false}, req.body, {upsert: true}, function (err, doc) {
+    Blog.find({'author': req.params.username, 'draft': false}, {upsert: true}, function (err, doc) {
         if (err) {
             console.log(err);
         } else {
@@ -32,7 +32,7 @@ router.get('/myposts/:username', function (req, res, next) {
 
 //Get
 router.get('/mydrafts/:username', function (req, res, next) {
-    Blog.find({'author': req.params.username, 'draft': true}, req.body, {upsert: true}, function (err, doc) {
+    Blog.find({'author': req.params.username, 'draft': true}, {upsert: true}, function (err, doc) {
         if (err) {
             console.log(err);
         } else {
